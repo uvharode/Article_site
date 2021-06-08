@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %} 
+{% block body %}
+<div class="container">
+<a href="{{ path('ShowAllUsers') }}" class="btn btn-dark">Show All Users</a>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-light mb-3 mt-3">
+        <div class="card-body">
+        <div class="card-header mb-3">All Articles</div>
+      {% if articles %}
+      <table id="articles" class="table table-stripped">
+        <thead>
+         <tr>
+           {# <th>User</th> #}
+           <th>Article Title</th>
+           <th>Actions</th>
+         </tr>
+        </thead>
+        <tbody>
+          {% for article in articles %}
+            <tr>
+              {# <td>{{ user.username }}</td> #}
+              <td>{{ article.title }}</td>
+              <td>
+                <a href="/article/show/{{ article.id }}" class="btn btn-dark">Show<a/>
+                <a href="/article/edit/{{ article.id }}" class="btn btn-warning">Edit<a/>
+                <a href="#" class="btn btn-danger delete-article" 
+                          data-id="{{ article.id }}" >Delete<a/>
+              </td>
+            </tr>
+          {% endfor %}
+        {# {% endfor %} #}
+        </tbody>
+      </table>
+      {% endif %}
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script src="/js/main.js"></script>
+{% endblock %}

@@ -1,0 +1,68 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    env(MONGODB_URL): ''
+    env(MONGODB_DB): ''
+    image_directory: '%kernel.project_dir%/public/uploads/content'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    # app.form_login_authenticator:
+        # class: App\Security\FormLoginAuthenticator
+        # arguments: ["@router", "@security.password_encoder"]
+        
+    # app.form_login_authenticator:
+    # App\Service\PasswordEncoder:
+    #         calls:
+    #             methods: 'UpdateEncodePassword'
+    #             arguments: 
+    #                     "@security.password_encoder"
+    App\Controller\AccountController:
+        class: App\Controller\AccountController
+        arguments: 
+              ["@security.token_storage","@security.encoder_factory"]
+
+    # App\Controller\SecurityController:
+    #     class: App\Controller\SecurityController
+    #          arguments: 
+    #                   ["@security.token_storage","@security.encoder_factory"]
+    
+    # session:
+    #     public : true
+    #     class: Symfony\Component\HttpFoundation\Session\Session
+    #     arguments: ['@session.storage']
+
+    # session.namespacedattributebag:
+    #     class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%image_directory%'
+
+    App\Controller\SecurityController:
+        

@@ -1,0 +1,52 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    # enable_authenticator_manager: true
+    encoders:
+        App\Document\User: 
+            algorithm: 'auto'
+        
+        # Symfony\Component\Security\Core\User\User: 'auto' (bcrypt)
+
+    providers:
+        database_users:
+            mongodb:
+                class: App\Document\User
+                property: email
+        database_article:
+            mongodb:
+                class: App\Document\Article
+                property: author
+        
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: lazy
+            lazy: true
+            provider: database_users
+            #for Login start#
+            # form_login:
+            #     login_path: app_login
+            #     check_path: login
+            # guard:
+            #     authenticators:
+            #         - App\Security\FormLoginAuthenticator
+            #         #PasswordEncoder
+                    # - app.form_login_authenticator
+            logout:
+                path: app_logout
+                target: /
+            #for Login end#
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+         - { path: /, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #  - { path: /list, roles: ROLE_USER }

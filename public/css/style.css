@@ -1,0 +1,30 @@
+figure
+{
+    margin: 0 0 1rem;
+}
+
+img
+{
+    /* vertical-align: middle; */
+    align-self: center;
+
+}
+
+.img-thumbnail
+{
+    align-self: center;
+}
+
+.body-main 
+{ 
+    padding-top: 70px; 
+    background-color: darkolivegreen;
+}
+
+.btn timeline
+{
+ display: block;
+ align-self: center;
+ padding-left: 50%;
+}
+

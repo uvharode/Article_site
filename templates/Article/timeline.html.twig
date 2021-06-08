@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %} 
+{% block body %}
+<div class="container">
+  <br>
+  <a href="/article/new/{{username}}" class="btn btn-light">Create New Article</a>
+
+
+  <div class="row">
+
+    <div class="col-sm-8">
+      <div class="card bg-light mb-3 mt-3">
+        <div class="card-body">
+      {% for article in articles %}
+        {# <div id="articles" class="col-sm-12 blog-main"> #}
+          <div id="articles" class="col-sm-15 blog-main">
+                    <div class="blog-post">
+                        <h1 class="blog-post-title">{{ article.title }}</h1>
+                        <h5>
+                        <i class="blog-post-author">
+                                <p class="h5-danger"> by {{ article.author }}</p> 
+                        </i>
+                        </h5> 
+                        {# <h5>Article :</h5> #}
+                        <figure class = "card bg-light col-md-12">
+                        <img class = "img-thumbnail" 
+                        style="align-self: center;"
+                        src="{{ asset('uploads/content/' ~ article.image) }}" 
+                        alt="{{ article.image }}"
+                        height="700px"
+                        width="700px"
+                        >
+                        </img>
+                        </figure>
+
+                        <p>{{ article.content }} </p>
+                        {# <i>
+                              <h5>Username : {{ username }}</h5>
+                              <h5>Email : {{ email }} </h5>
+                        </i> #}
+
+                          {# <a href="/article/edit/{{ article.id }}" class="btn btn-warning">Edit<a/>
+                          <a href="#" class="btn btn-danger delete-article" 
+                                      data-id="{{ article.id }}" >Delete<a/> #}
+                                      <br>
+                                      <br> 
+                    </div>
+          </div>
+      {% endfor %}
+        </div>
+      </div>  
+    </div>
+    {# --------------------------- #}
+    
+     <div class="col-sm-4"> 
+          {% for art in articlesD %}
+            <div class="card" style="width: 15rem;">
+                <img class = "img-thumbnail" 
+                        src="{{ asset('uploads/content/' ~ art.image) }}" 
+                        alt="{{ art.image }}">
+                </img>
+                <div class="card-body">
+                  <h5 class="card-title">{{art.title}}</h5>
+                  <a href="/article/showA/{{ art.id }}/{{username}}" class="btn btn-primary">Show<a/>
+                </div>
+            </div>
+          {% endfor %}
+     </div> 
+  </div> {# row #}
+</div> {# container #}
+{% endblock %}
+{% block javascripts %}
+  <script src="/js/main.js"></script>
+{% endblock %}

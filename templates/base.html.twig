@@ -1,0 +1,41 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Article-Site!{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css"/>
+    {% block stylesheets %}{% endblock %}
+  </head>
+  <body class="body-main bg-dark">
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light"
+      style="height: 70px;"
+    >
+      <a class="navbar-brand" href="#">Article Site</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+      <div class="nav navbar-nav navbar-right">
+
+        {% if app.user != null %}
+        {# <li><a class="nav-link" href="{{ path('list') }}">View List</a></li> #}
+        <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
+        {% endif %}
+
+        {% if app.user == null %}
+          <a href="{{ path('login') }}" class="btn btn-light">Login</a>
+        
+          <a href="{{ path('register') }}" class="btn btn-light">Register</a>
+     
+          <a href="{{ path('app_logout') }}" class="btn btn-light">Logout</a>
+
+        {% endif %}
+
+      </div>
+    </nav>
+    {% block body %}{% endblock %} {% block javascripts %}{% endblock %}
+  </body>
+</html>

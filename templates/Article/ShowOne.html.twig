@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %} 
+{% block body %}
+<div class="container">
+<br>
+<a href="/timeline/{{user.username}}" class="btn btn-light">TimeLine</a>
+
+
+  <div class="row">
+        <div class="col-sm-8">
+            <div class="card bg-light mb-5 mt-3">
+                <div class="card-body">
+                  {# <div class="row"> #}
+                      <div class="col-sm-15 blog-main">
+                          <div class="blog-post">
+                              <h1 class="blog-post-title">{{ article.title }}</h1>
+                              <h5>
+                              <i class="blog-post-author">
+                                      <p class="h5-danger"> by {{ article.author }}</p> 
+                              </i>
+                                </h5> 
+                              {# <h5>Article :</h5> #}
+                                <figure class = "card bg-light sm-10">
+                              <img class = "img-thumbnail" 
+                              src="{{ asset('uploads/content/' ~ article.image) }}" 
+                              alt="{{ article.image }}">
+                              </img>
+                              </figure>
+
+                              <p>{{ article.content }} </p>
+                              <i>
+                              <h5>Username : {{ user.username }}</h5>
+                              <h5>Email : {{ user.email }} </h5>
+                              </i>
+                              <a href="/article/edit/{{user.username}}/{{ article.id }}" class="btn btn-warning">Edit<a/>
+
+                          </div> {#blogpost#}
+                      {# </div> #}
+                  </div>          
+                </div>
+            </div>  
+        </div>
+  
+{# -----------Aside------------ #}
+
+        <div class="col-sm-4"> 
+          {% for artA in articlesA %}
+            <div class="card" style="width: 15rem;">
+                <img class = "img-thumbnail" 
+                        src="{{ asset('uploads/content/' ~ artA.image) }}" 
+                        alt="{{ artA.image }}">
+                </img>
+                <div class="card-body">
+                  <h5 class="card-title">{{artA.title}}</h5>
+                  <a href="/article/show/{{ artA.id }}" class="btn btn-primary">Show<a/>
+                </div>
+            </div>
+          {% endfor %}
+          {% for artD in articlesD %}
+            <div class="card" style="width: 15rem;">
+                <img class = "img-thumbnail" 
+                        src="{{ asset('uploads/content/' ~ artD.image) }}" 
+                        alt="{{ artD.image }}">
+                </img>
+                <div class="card-body">
+                  <h5 class="card-title">{{artD.title}}</h5>
+                  <a href="/article/show/{{ artD.id }}" class="btn btn-primary">Show<a/>
+                </div>
+            </div>
+          {% endfor %}
+        </div>  {# Aside ------------------- #}
+
+  {# -------------Courosl------------ #}
+
+              {# <div id="demo" class="carousel slide bg-dark" data-interval="false">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                {% for i in 0..articlesA|length %}
+                <li data-target="#demo" data-slide-to="{{ i }}" class="active"></li>
+                {% endfor %}
+              </ol> #}
+              <!-- The slideshow -->
+              {# <div class="carousel-inner">
+              
+                {% for art in articlesA %}
+                  <div class="item {% if loop.first %}active{% endif %}">
+                    <div data-swip-loop="{{ loop.index }}"
+                           class="card" style="width: 15rem;">
+                            <img 
+                              src="{{ asset('uploads/content/' ~ art.image) }}" 
+                              alt="{{ art.image }}"
+                              >
+                            </img>
+                            <div class="card-body">
+                              <h5 class="card-title">{{art.title}}</h5>
+                              <a href="/article/show/{{ art.id }}" class="btn btn-primary">Show<a/>
+                            </div>
+                    </div>
+                  </div> 
+                {% endfor %} #}
+                {# ---------------- #}
+                 {# {% for art in articlesD %}
+                  <div class="item {% if loop.first %}active{% endif %}">
+                    <div data-swip-loop="{{ loop.index }}"
+                           class="card" style="width: 15rem;">
+                            <img 
+                              src="{{ asset('uploads/content/' ~ art.image) }}" 
+                              alt="{{ art.image }}"
+                              >
+                            </img>
+                            <div class="card-body">
+                              <h5 class="card-title">{{art.title}}</h5>
+                              <a href="/article/show/{{ art.id }}" class="btn btn-primary">Show<a/>
+                            </div>
+                    </div>
+                  </div> 
+                {% endfor %}
+              </div> #}
+              <!-- Left and right controls -->
+              {# <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" href="#demo" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+            </div> #}
+
+            {# </div> ASIDE---------------------- #}
+
+  </div> {# row #}
+
+</div> {# container #}
+{% endblock %}

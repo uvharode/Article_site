@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %} 
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-light mb-3 mt-3">
+        <div class="card-body">
+        <div class="card-header mb-3">All Users</div>
+
+
+
+
+
+ {% if users %}
+      <table id="users" class="table table-stripped">
+        <thead>
+         <tr>
+           <th>User Details</th>
+           <th>Actions</th>
+         </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>
+                Id : {{ user.id }}
+                <br>
+                Username : {{ user.username }}
+                <br>
+                Email : {{ user.email }}
+              </td>
+              <td>
+                <a href="/user/edit/{{ user.id }}" class="btn btn-warning">Edit<a/>
+                <a href="#" class="btn btn-danger delete-user" 
+                          data-id="{{ user.id }}" >Delete<a/>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+                    {# {% for user in users %}
+                      <div class="article-container my-1">
+                        <div class="card bg-light mb-3 mt-3">
+                          <div id="users" class="card-body">
+                            Id: <span>{{user.id}}</span>
+                            <br>
+                            Username: <span>{{user.username}}</span>
+                            <br>
+                            Email: <span>{{user.email}}</span>
+                            </div>
+                            </div>                         
+                          <a href="/user/edit/{{ user.id }}" class="btn btn-warning">Edit<a/>
+                          <a href="#" class="btn btn-danger delete-user" 
+                                  data-id="{{ user.id }}" >Delete<a/>                     
+                      </div>
+                    {% endfor %} #}
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+  <script src="/js/main-user.js"></script>
+{% endblock %}
